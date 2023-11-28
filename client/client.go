@@ -10,8 +10,8 @@ import (
 )
 
 const (
-	readTimeOut        = 10
-	writeTimeOut       = 10
+	readTimeOut        = 100
+	writeTimeOut       = 100
 	maxIdleConnections = 128
 	maxConnections     = 512
 )

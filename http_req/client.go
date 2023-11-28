@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 
 	zerologloki "github.com/thisismz/zerolog-loki"
@@ -62,13 +62,15 @@ func (p *promHttpClient) Push(ctx context.Context, req zerologloki.PushRequest) 
 	if p.password != "" {
 		request.SetBasicAuth(p.username, p.password)
 	}
+	// set timeout
+	request = request.WithContext(ctx)
 
-	resp, err := p.httpClient.Do(request.WithContext(ctx))
+	resp, err := p.httpClient.Do(request)
 	if err != nil {
 		return err
 	}
 
-	respBody, err := ioutil.ReadAll(resp.Body)
+	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return err
 	}
