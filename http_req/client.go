@@ -15,7 +15,7 @@ const (
 	readTimeOut        = 10
 	maxIdleConnections = 128
 	maxConnections     = 512
-	path               = "/loki/api/v1/push"
+	path               = ""
 )
 
 type HttpDoer interface {
